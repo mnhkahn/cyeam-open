@@ -4,6 +4,7 @@ dist/
 node_modules/
 .env
 .env.zuplo
+.claude/
 
 # OS Stuff
 

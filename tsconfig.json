@@ -2,6 +2,9 @@
   "include": ["modules/**/*", ".zuplo/**/*", "tests/**/*"],
   "exclude": ["./node_modules", "./dist"],
   "compilerOptions": {
+    "paths": {
+      "modules/*": ["./modules/*"]
+    },
     "module": "ESNext",
     "target": "ES2022",
     "lib": ["ESNext", "WebWorker", "Webworker.Iterable"],
