@@ -10,8 +10,8 @@ const config: ZudokuConfig = {
     title: "Cyeam开放平台",
     logo: {
       src: {
-        light: "https://res.cloudinary.com/cyeam/image/upload/v1776695726/clipboard_1776695720974_xcqzrmglv.webp",
-        dark: "https://res.cloudinary.com/cyeam/image/upload/v1776695726/clipboard_1776695720974_xcqzrmglv.webp",
+        light: "https://res.cloudinary.com/cyeam/image/upload/v1780929816/screenshot-20260510-213734.webp",
+        dark: "https://res.cloudinary.com/cyeam/image/upload/v1780929816/screenshot-20260510-213734.webp",
       },
     },
   },
