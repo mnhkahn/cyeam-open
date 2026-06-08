@@ -1,0 +1,208 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Todo API",
+    "description": "A simple task management API that lets you create, read, update, and delete todo items. Use this API to build productivity apps, task trackers, or integrate task management into your existing workflows.\n\n## Getting Started\n\nAll endpoints accept and return JSON. To create your first todo, send a `POST` request to `/todos` with a title and userId.\n\n## Authentication\n\nThis sample API does not require authentication. Add [API key authentication](https://zuplo.com/docs/policies/api-key-inbound) or any other policy via your Zuplo gateway configuration.",
+    "contact": {
+      "name": "API Support",
+      "url": "https://zuplo.com/docs",
+      "email": "support@zuplo.com"
+    }
+  },
+  "tags": [
+    {
+      "name": "Todo",
+      "description": "Endpoints for managing todo items including creating, listing, updating, and deleting tasks."
+    }
+  ],
+  "components": {
+    "schemas": {
+      "Todo": {
+        "description": "A complete todo item as returned by the API, including its system-assigned ID.",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "The todo ID"
+          },
+          "title": {
+            "type": "string",
+            "description": "The todo title"
+          },
+          "completed": {
+            "type": "boolean",
+            "description": "Whether the todo is completed"
+          },
+          "userId": {
+            "type": "integer",
+            "description": "The user ID who owns the todo"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "completed",
+          "userId"
+        ]
+      },
+      "CreateTodo": {
+        "description": "The request body for creating a new todo. Only a title and userId are required.",
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "The todo title"
+          },
+          "completed": {
+            "type": "boolean",
+            "description": "Whether the todo is completed",
+            "default": false
+          },
+          "userId": {
+            "type": "integer",
+            "description": "The user ID who owns the todo"
+          }
+        },
+        "required": [
+          "title",
+          "userId"
+        ]
+      },
+      "UpdateTodo": {
+        "description": "The request body for updating a todo. All fields are optional so you can patch individual properties.",
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "The todo title"
+          },
+          "completed": {
+            "type": "boolean",
+            "description": "Whether the todo is completed"
+          },
+          "userId": {
+            "type": "integer",
+            "description": "The user ID who owns the todo"
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/api/roadbook/csv": {
+      "x-zuplo-path": {
+        "pathMode": "open-api"
+      },
+      "post": {
+        "summary": "生成旅游线路图",
+        "description": "",
+        "x-zuplo-route": {
+          "corsPolicy": "none",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "https://www.cyeam.com"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound-1",
+              "set-headers-inbound"
+            ]
+          }
+        },
+        "operationId": "new-route-e309f715",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "text/plain": {
+              "schema": {
+                "type": "string",
+                "description": "CSV格式的地点列表，每行一个地点：名称,地址,类型,日期备注"
+              },
+              "example": "淄博酒店,淄博市张店区某路,住宿,4.30,入住\n八大局便民市场,淄博市张店区共青团东路,餐饮,5.1 早市逛吃"
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "分享ID"
+                    },
+                    "url": {
+                      "type": "string",
+                      "description": "路书页面链接"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/qrcode": {
+      "x-zuplo-path": {
+        "pathMode": "open-api"
+      },
+      "get": {
+        "summary": "生成二维码",
+        "description": "",
+        "x-zuplo-route": {
+          "corsPolicy": "none",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "https://www.cyeam.com"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        },
+        "operationId": "new-route-02f05b40",
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "required": true,
+            "description": "要编码为二维码的文本内容",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "qrcode": {
+                      "type": "string",
+                      "description": "Base64 编码的 PNG 二维码图片"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
