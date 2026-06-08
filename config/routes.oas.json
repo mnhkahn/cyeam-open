@@ -119,6 +119,47 @@
           }
         }
       }
+    },
+    "/api/slogan": {
+      "x-zuplo-path": {
+        "pathMode": "open-api"
+      },
+      "get": {
+        "summary": "获取每日 Slogan",
+        "description": "返回一段每日激励文案，无需鉴权。",
+        "x-zuplo-route": {
+          "corsPolicy": "none",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "https://www.cyeam.com"
+            }
+          },
+          "policies": {
+            "inbound": []
+          }
+        },
+        "operationId": "slogan-get",
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "slogan": {
+                      "type": "string",
+                      "description": "每日 Slogan 文案"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
