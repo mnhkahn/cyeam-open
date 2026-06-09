@@ -9,7 +9,8 @@ cyeam.com 开放接口网关，基于 [Zuplo](https://zuplo.com) 部署。
 | POST | `/api/roadbook/csv` | 生成旅游线路图（转发到 cyeam.com） |
 | GET | `/api/qrcode?text=` | 生成二维码（转发到 cyeam.com） |
 
-基础 URL：`https://cyeam-open-main-d02895c.zuplo.site`
+- 网关（API 调用）：`https://cyeam-open-main-1567205.zuplo.app`
+- 开发者门户（文档）：`https://cyeam-open-main-d02895c.zuplo.site`
 
 ## 修改流程
 
